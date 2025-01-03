@@ -7,6 +7,18 @@ from datetime import datetime
 # load local sets.json
 with open("cardsets.json", "r")  as file:
     cardsets_data = json.load(file)
+
+# load forbidden, limited, and semi limited docs
+with open("edison-forbidden.json", "r")  as file:
+    forbidden_data = [line.strip() for line in file if line.strip()]
+
+with open("edison-limited.json", "r")  as file:
+    limited_data = [line.strip() for line in file if line.strip()]
+
+with open("edison-semi-limited.json", "r")  as file:
+    semi_limited_data = [line.strip() for line in file if line.strip()]
+
+edison_date = datetime(year=2010, month=3, day=1)
     
 # init or load csv
 csv_filename = "cards.csv"
@@ -92,7 +104,11 @@ def process_card(card_data):
           card_id, name, race, card_type, desc, atk, defense, level, attribute, archetype, url, set_name, set_code, set_rarity, set_rarity_code, earliest_date  
         ])
     print(f"Card '{name}' added to the cards table!")
-    
+
+    if name in forbidden_data or earliest_date > edison_date: print("\033[31mEdison Forbidden\033[0m")
+    elif name in limited_data: print("\033[33mEdison Limited\033[0m")
+    elif name in semi_limited_data: print("\033[34mEdison Semi-limited\033[0m")
+    else: print("\033[32mEdison legal at 3\033[0m")
     
 # Main loop
 while True:
