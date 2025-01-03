@@ -9,13 +9,13 @@ with open("cardsets.json", "r")  as file:
     cardsets_data = json.load(file)
 
 # load forbidden, limited, and semi limited docs
-with open("edison-forbidden.json", "r")  as file:
+with open("edison-forbidden.txt", "r")  as file:
     forbidden_data = [line.strip() for line in file if line.strip()]
 
-with open("edison-limited.json", "r")  as file:
+with open("edison-limited.txt", "r")  as file:
     limited_data = [line.strip() for line in file if line.strip()]
 
-with open("edison-semi-limited.json", "r")  as file:
+with open("edison-semi-limited.txt", "r")  as file:
     semi_limited_data = [line.strip() for line in file if line.strip()]
 
 edison_date = datetime(year=2010, month=3, day=1)
